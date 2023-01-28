@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from './_models/users';
 import { AccountService } from './_services/account.service';
+import { LoadingSpinnerService } from './_services/loading-spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,10 @@ export class AppComponent implements OnInit {
   title = 'Dating Application';
   users: any;
 
-  constructor(private http: HttpClient, private accountService: AccountService) {}
+  constructor(private http: HttpClient, 
+    private accountService: AccountService,
+    public loadingSpinnerService: LoadingSpinnerService
+    ) {}
 
   ngOnInit(): void {
     this.setCurrentUser();

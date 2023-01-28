@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { Member } from 'src/app/_models/member';
+import { LoadingSpinnerService } from 'src/app/_services/loading-spinner.service';
 import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
@@ -14,7 +15,9 @@ export class MemberDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
 
-  constructor(private memberService: MembersService, private route: ActivatedRoute) {}
+  constructor(private memberService: MembersService, 
+    private route: ActivatedRoute,
+    private loadingSpinnerService: LoadingSpinnerService) {}
 
   ngOnInit(): void {
     this.loadMember();
@@ -46,13 +49,14 @@ export class MemberDetailComponent implements OnInit {
   }
 
   loadMember() {
+    this.loadingSpinnerService.setIsLoading(true);
     const username = this.route.snapshot.paramMap.get('username');
     if(!username) return;
     this.memberService.getMember(username).subscribe({
       next: member => {
         this.member = member;
         this.galleryImages = this.getImages();
-        console.log(this.galleryImages);
+        this.loadingSpinnerService.setIsLoading(false);
       }
     });
   }
