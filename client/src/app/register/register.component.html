@@ -2,11 +2,56 @@
     <h2 class="text-center text-primary">Sign up</h2>
     <hr>
     <div class="mb-3">
+        <label style="margin-right:10px">I am a: </label>
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" value="male" formControlName="gender">Male
+        </label>
+        <label class="form-check-label ms-2 mb-2">
+            <input type="radio" class="form-check-input" value="female" formControlName="gender">Female
+        </label>
+        <input 
+            type="text" 
+            class="form-control is-invalid"
+            [class.is-invalid]="registerForm.get('username')?.touched && registerForm.get('username')?.invalid"
+            formControlName="username"
+            placeholder="Username"
+            />
+        <div class="alert alert-danger mt-2" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">Please enter Username</div>
+    </div>
+    <div class="mb-3">
         <input 
             type="text" 
             class="form-control"
-            formControlName="username"
-            placeholder="Username"
+            formControlName="knownAs"
+            placeholder="Known As"
+            [class.is-invalid]="registerForm.get('knownAs')?.touched && registerForm.get('knownAs')?.invalid"
+            />
+    </div>
+    <div class="mb-3">
+        <input 
+            type="text" 
+            class="form-control"
+            formControlName="dateOfBirth"
+            placeholder="Date of Birth"
+            [class.is-invalid]="registerForm.get('dateOfBirth')?.touched && registerForm.get('dateOfBirth')?.invalid"
+            />
+    </div>
+    <div class="mb-3">
+        <input 
+            type="text" 
+            class="form-control"
+            formControlName="city"
+            placeholder="City"
+            [class.is-invalid]="registerForm.get('city')?.touched && registerForm.get('city')?.invalid"
+            />
+    </div>
+    <div class="mb-3">
+        <input 
+            type="text" 
+            class="form-control"
+            formControlName="country"
+            placeholder="Country"
+            [class.is-invalid]="registerForm.get('country')?.touched && registerForm.get('country')?.invalid"
             />
     </div>
     <div class="mb-3">
@@ -15,6 +60,7 @@
             class="form-control"
             formControlName="password"
             placeholder="Password"
+            [class.is-invalid]="registerForm.get('password')?.touched && registerForm.get('password')?.invalid"
             />
     </div>
     <div class="mb-3">
@@ -23,6 +69,7 @@
             class="form-control"
             formControlName="confirmPassword"
             placeholder="Password"
+            [class.is-invalid]="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid"
             />
     </div>
     <div class="text-center">
